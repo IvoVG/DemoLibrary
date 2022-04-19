@@ -55,10 +55,7 @@ namespace DemoLibrary.Data.Models
         public Country Country { get; set; }
 
         [Required]
-        public string MaxCoverPath { get; set; }
-
-        [Required]
-        public string MinCoverPath { get; set; }
+        public string CoverPath { get; set; }
 
         [Required]
         public string Address { get; set; }
