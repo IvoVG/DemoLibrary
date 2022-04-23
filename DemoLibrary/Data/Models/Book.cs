@@ -4,7 +4,9 @@ namespace DemoLibrary.Data.Models
 {
     public class Book
     {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public Book()
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             this.Id = Guid.NewGuid().ToString();
         }
@@ -27,7 +29,7 @@ namespace DemoLibrary.Data.Models
 
         public Worker Worker { get; set; }
 
-        public int Create { get; set; }
+        public int? CreateYear { get; set; }
 
         public DateTime Uploaded { get; set; }
 

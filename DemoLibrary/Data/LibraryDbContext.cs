@@ -6,6 +6,8 @@ namespace DemoLibrary.Data
 {
     public class LibraryDbContext : IdentityDbContext
     {
+        #pragma warning disable CS8618
+        #pragma warning disable CS8604
         public LibraryDbContext()
         {
         }
@@ -14,7 +16,9 @@ namespace DemoLibrary.Data
         {
         }
 
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
         public DbSet<User> Users { get; set; }
+#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
         public DbSet<Country> Countries { get; set; }
         public DbSet<Translator> Translators { get; set; }
         public DbSet<Author> Authors { get; set; }
@@ -44,5 +48,7 @@ namespace DemoLibrary.Data
         {
             base.OnConfiguring(optionsBuilder);
         }
+        #pragma warning restore CS8618
+        #pragma warning restore CS8604
     }
 }
