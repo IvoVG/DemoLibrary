@@ -1,0 +1,90 @@
+﻿@using DemoLibrary.Models.Book
+@model AddBookModel
+
+@{
+    ViewData["Title"] = "Add Book";
+}
+
+
+<h1>Добави книга</h1>
+
+<form enctype="multipart/form-data" method="post">
+    <div class="form-group">
+        <label asp-for="Title" class="font-weight-bold">Заглавие</label>
+        <input asp-for="Title" class="form-control" value="" required>
+        <span asp-validation-for="Title" class="small text-danger"></span>
+    </div>
+    <p class="font-weight-bold">Автор</p>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="AuthorFirstName" class="font-weight-bolder">Име - Автор</label>
+            <input asp-for="AuthorFirstName" class="form-control" value="" required>
+            <span asp-validation-for="AuthorFirstName" class="small text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="AuthorLastName" class="font-weight-bolder">Фамилия - Автор</label>
+            <input asp-for="AuthorLastName" class="form-control" value="" required>
+            <span asp-validation-for="AuthorLastName" class="small text-danger"></span>
+        </div>
+    </div>
+    <p class="font-weight-bold">Преводач</p>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="TranslatorFirstName" class="font-weight-bolder">Име - Преводач</label>
+            <input asp-for="TranslatorFirstName" class="form-control" value="" required>
+            <span asp-validation-for="TranslatorFirstName" class="small text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="TranslatorLastName" class="font-weight-bolder">Фамилия - Преводач</label>
+            <input asp-for="TranslatorLastName" class="form-control" value="" required>
+            <span asp-validation-for="TranslatorLastName" class="small text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryId" class="font-weight-bold">Категория</label>
+        <select asp-for="CategoryId" class="form-control">
+            
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="GenreId" class="font-weight-bold">Жанр</label>
+        <select asp-for="GenreId" class="form-control">
+
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="CountryId" class="font-weight-bold">Държава</label>
+        <select asp-for="CountryId" class="form-control">
+
+            
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Summary" class="font-weight-bold">Oбобщение</label>
+        <textarea asp-for="Summary" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Summary" class="small text-danger"></span>
+    </div>
+    <div class="form-row">
+        <div class="col-md-5 mb-3">
+            <label asp-for="CreateYear" class="font-weight-bolder">Година на създаване</label>
+            <input asp-for="CreateYear" class="form-control" value="" required>
+            <span asp-validation-for="CreateYear" class="small text-danger"></span>
+        </div>
+        <div class="col-md-5 mb-3">
+            <label asp-for="Series" class="font-weight-bolder">Серия</label>
+            <input asp-for="Series" class="form-control" value="">
+            <span asp-validation-for="Series" class="small text-danger"></span>
+        </div>
+    </div>
+    <div class="mb-3">
+  <label for="formFile" class="form-label" asp-for="CoverUrl">Качи корица</label>
+  <input class="form-control form-control" id="formFile" type="file"asp-for="CoverUrl" required>
+  <span asp-validation-for="CoverUrl" class="small text-danger"></span>
+</div>
+<div class="mb-3">
+  <label for="formFile" class="form-label"asp-for="Address">Качи книга</label>
+  <input class="form-control" type="file" id="formFile"asp-for="Address" required>
+  <span asp-validation-for="Address" class="small text-danger"></span>
+</div>
+    <button class="btn-outline-dark btn-primary btn-lg btn-block" type="submit" value="Upload">Добави</button>
+</form>

@@ -73,7 +73,7 @@ namespace DemoLibrary.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Create")
+                    b.Property<int?>("CreateYear")
                         .HasColumnType("int");
 
                     b.Property<int>("Downloads")

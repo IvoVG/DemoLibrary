@@ -1,5 +1,7 @@
 using DemoLibrary.Data;
-using DemoLibrary.Infrastructure;
+using DemoLibrary.Services.Book;
+using DemoLibrary.Services.Reader;
+using DemoLibrary.Services.Worker;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +15,13 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => 
 
-options.SignIn.RequireConfirmedAccount = true)
+options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<LibraryDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IReaderService, ReaderService>();
+builder.Services.AddTransient<IWorkerService, WorkerService>();
+builder.Services.AddTransient<IBookService, BookService>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -39,9 +45,6 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 var app = builder.Build();
-
-app.PrepareDatabase();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -61,6 +64,14 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapRazorPages();
+});
 
 app.MapControllerRoute(
     name: "default",

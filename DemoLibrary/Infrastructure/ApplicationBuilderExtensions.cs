@@ -16,7 +16,7 @@ namespace DemoLibrary.Infrastructure
             var services=serviceScope.ServiceProvider;
 
             MigrateDatabase(services);
-            SeedAdministrator(services);
+            //SeedAdministrator(services);
 
             return app;
         }

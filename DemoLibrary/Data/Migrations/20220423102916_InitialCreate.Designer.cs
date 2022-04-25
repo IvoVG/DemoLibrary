@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoLibrary.Data.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    [Migration("20220422210955_Initial")]
-    partial class Initial
+    [Migration("20220423102916_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,7 +75,7 @@ namespace DemoLibrary.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Create")
+                    b.Property<int?>("CreateYear")
                         .HasColumnType("int");
 
                     b.Property<int>("Downloads")

@@ -1,0 +1,32 @@
+﻿
+@using DemoLibrary.Data.Models
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Workshop";
+}
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+    <div class="container">
+        <h1 class="display-4 font-weight-bolder">РАБОТИЛНИЦА</h1>
+    </div>
+@if (SignInManager.IsSignedIn(User))
+{
+    var userId = UserManager.GetUserId(User);
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+            Добавяне на:
+        </a>
+        <a href="/Author/Add" class="list-group-item list-group-item-action">Автор</a>
+        <a href="/Book/Add" class="list-group-item list-group-item-action">Книга</a>
+        <a href="/Category/Add" class="list-group-item list-group-item-action">Категория</a>
+        <a href="/Genre/Add" class="list-group-item list-group-item-action">Жанр</a>
+        <a href="/Country/Add" class="list-group-item list-group-item-action">Държава</a>
+        <a href="/Translator/Add" class="list-group-item list-group-item-action">Преводач</a>
+    </div>
+
+    <div>
+        <a href="/Worker/All?Id=@userId" class="list-group-item list-group-item-action">All Book</a>
+    </div>
+}

@@ -1,0 +1,32 @@
+﻿@using DemoLibrary.Models.Author
+@model AuthorAddModel
+
+@{
+    ViewData["Title"] = "Add Author";
+}
+
+<h1>Добави автор</h1>
+
+<form method="post">
+    <div class="form-row ">
+        <label asp-for="FirstName">Име</label>
+        <input asp-for="FirstName" class="form-control" value="" required>
+        <span asp-validation-for="FirstName" class="small text-danger"></span>
+    </div>
+    <div class="form-row ">
+        <label asp-for="LastName">Фамилия</label>
+        <input asp-for="LastName" class="form-control" value="" required>
+        <span asp-validation-for="LastName" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CountryId">Example select</label>
+        <select asp-for="CountryId" class="form-control">
+            @foreach (var country in Model.Countries)
+            {
+                <option value="@country.Id">@country.Name</option>
+            }
+        </select>
+        <span asp-validation-for="CountryId" class="small text-danger"></span>
+    </div>
+    <button class="btn-outline-dark btn-primary btn-lg btn-block" type="submit">Добави</button>
+</form>
