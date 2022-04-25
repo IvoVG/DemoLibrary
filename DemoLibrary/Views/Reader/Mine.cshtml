@@ -1,0 +1,24 @@
+﻿@using DemoLibrary.Services.Reader
+
+@model ReaderServiceView
+@{
+    ViewBag.Title = "My library room";
+}
+
+<h3 class="text-center" style="font-style:italic">Здравей @Model.Name</h3>
+<form>
+    <div class="container-md; flex-md-shrink-0">
+        <div class="list-group; float-md-left">
+            <partial name="_MineRoomPartial" model="@Model" />
+
+        </div>
+    </div>
+    <div class="offset-10 float-md-right form-row">
+        @foreach (var book in Model.Books)
+        {
+            <div class="col-sm-4; flex-md-wrap">
+                <a href="/Reader/MineRoom?id= @book.Id"><img src="@book.CoverPath" style="height:300px; width:200px" class="img-responsive book"></a>
+            </div>
+        }
+    </div>
+</form>

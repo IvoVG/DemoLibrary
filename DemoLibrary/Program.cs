@@ -17,6 +17,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 
 options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<LibraryDbContext>();
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IReaderService, ReaderService>();

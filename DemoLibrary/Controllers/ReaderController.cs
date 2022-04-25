@@ -63,5 +63,19 @@ namespace DemoLibrary.Controllers
 
             return RedirectToAction("All", "Book");
         }
+
+        public IActionResult Mine(string id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var book = this.data.Books.FirstOrDefault(b => b.Id == id);
+            var model = this.service.GetReaderModel(userId, id);
+
+            if (model == null)
+            {
+                return RedirectToAction("All", "Book");
+            }
+
+            return View(model);
+        }
     }
 }
