@@ -1,12 +1,13 @@
 ﻿
 @using DemoLibrary.Data.Models
 @using Microsoft.AspNetCore.Identity
+
 @{
     ViewData["Title"] = "Workshop";
 }
 
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
     <div class="container">
         <h1 class="display-4 font-weight-bolder">РАБОТИЛНИЦА</h1>

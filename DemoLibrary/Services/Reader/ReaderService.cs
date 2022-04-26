@@ -70,7 +70,7 @@ namespace DemoLibrary.Services.Reader
 
             if (bookId == null)
             {
-                if (books != null)
+                if (books.Count() > 0)
                 {
                     bookId = books.ElementAt(0).BookId;
                 }

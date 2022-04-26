@@ -1,0 +1,18 @@
+﻿@using DemoLibrary.Models.Category
+
+@model CategoryAddModel
+
+@{
+    ViewData["Title"] = "Add Category";
+}
+
+<h1>Добави категория</h1>
+
+<form method="post">
+    <div class="form-row ">
+        <label asp-for="Name">Име на Категорията</label>
+        <input asp-for="Name" class="form-control" value="" required>
+        <span asp-validation-for="Name" class="small text-danger"></span>
+    </div>
+    <button class="btn-outline-dark btn-primary btn-lg btn-block" type="submit">Добави</button>
+</form>

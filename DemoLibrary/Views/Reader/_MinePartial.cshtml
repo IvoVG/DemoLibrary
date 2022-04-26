@@ -1,0 +1,27 @@
+﻿@using DemoLibrary.Services.Reader
+
+@model ReaderServiceView
+
+
+
+<div class="card col-xl-12 float-left" style="width: 18rem; resize:horizontal">
+    @if (Model.Books.Count != 0)
+    {
+    <img src="@Model.Book.CoverPath" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h3 class="card-title">@Model.Book.Title</h3>
+        <h5 class="card-title">@Model.Book.AuthorFullName</h5>
+        <p class="card-text">@Model.Book.Series</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Оценка @Model.Book.Rating от 10</li>
+        <li class="list-group-item">@Model.Book.Coments.Count</li>
+        <li class="list-group-item">@Model.Book.Ratings.Count</li>
+        <li class="list-group-item">@Model.Book.Rating</li>
+    </ul>
+    }
+    else
+    {
+    <h3>Няма Книги</h3>
+    }
+</div>
