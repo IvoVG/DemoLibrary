@@ -43,20 +43,28 @@
     <div class="form-group">
         <label asp-for="CategoryId" class="font-weight-bold">Категория</label>
         <select asp-for="CategoryId" class="form-control">
-            
+             @foreach (var category in Model.Categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
         </select>
     </div>
     <div class="form-group">
         <label asp-for="GenreId" class="font-weight-bold">Жанр</label>
         <select asp-for="GenreId" class="form-control">
-
+             @foreach (var genre in Model.Genres)
+            {
+                <option value="@genre.Id">@genre.Name</option>
+            }
         </select>
     </div>
     <div class="form-group">
         <label asp-for="CountryId" class="font-weight-bold">Държава</label>
         <select asp-for="CountryId" class="form-control">
-
-            
+            @foreach (var country in Model.Countries)
+            {
+                <option value="@country.Id">@country.Name</option>
+            }          
         </select>
     </div>
     <div class="form-group">

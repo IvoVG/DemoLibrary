@@ -1,7 +1,6 @@
 ﻿using DemoLibrary.Data;
 using DemoLibrary.Data.Models;
 using DemoLibrary.Models.Author;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoLibrary.Controllers
@@ -20,13 +19,13 @@ namespace DemoLibrary.Controllers
             {
                Countries = this.GetAuthorCountry()
             };
-            return View();
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult Add(AuthorAddModel model)
         {
-            if (this.data.Translators.Any(x => x.FirstName == model.FirstName.TrimStart().TrimEnd() && x.LastName == model.LastName.TrimStart().TrimEnd()))
+            if (this.data.Authors.Any(x => x.FirstName == model.FirstName.TrimStart().TrimEnd() && x.LastName == model.LastName.TrimStart().TrimEnd()))
             {
                 this.ModelState.AddModelError(nameof(model.FirstName), "Името на автора вече съществува.");
                 this.ModelState.AddModelError(nameof(model.LastName), "Името на автора вече съществува.");

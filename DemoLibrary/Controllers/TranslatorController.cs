@@ -32,6 +32,11 @@ namespace DemoLibrary.Controllers
                 this.ModelState.AddModelError(nameof(model.LastName), "Името на преводача вече съществува.");
             }
 
+            if (this.GetTranslatorCountry() == null)
+            {
+                this.ModelState.AddModelError(nameof(model.CountryId), "Няма Държава.");
+            }
+
             if (!ModelState.IsValid)
             {
                 model.Countries = this.GetTranslatorCountry();

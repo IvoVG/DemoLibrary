@@ -1,12 +1,12 @@
-﻿@using DemoLibrary.Models.Author
+﻿@using DemoLibrary.Models.Translator
 
-@model AuthorAddModel
+@model TranslatorAddModel
 
 @{
-    ViewData["Title"] = "Add Author";
+    ViewData["Title"] = "Add Translator";
 }
 
-<h1>Добави автор</h1>
+<h1>Добави преводач</h1>
 
 <form method="post">
     <div class="form-row ">
@@ -26,8 +26,9 @@
             {
                 <option value="@country.Id">@country.Name</option>
             }
+             <span asp-validation-for="CountryId" class="small text-danger"></span>
         </select>
-        <span asp-validation-for="CountryId" class="small text-danger"></span>
     </div>
     <button class="btn-outline-dark btn-primary btn-lg btn-block" type="submit">Добави</button>
 </form>
+

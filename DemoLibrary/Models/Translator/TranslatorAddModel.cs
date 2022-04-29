@@ -6,14 +6,14 @@ namespace DemoLibrary.Models.Translator
     {
         [Required]
         [StringLength(80, MinimumLength = 1)]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [Required]
         [StringLength(80, MinimumLength = 2)]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
-        public string CountryId { get; set; }
+        public string? CountryId { get; set; }
 
-        public IEnumerable<TranslatorCountryViewModel> Countries { get; set; }
+        public IEnumerable<TranslatorCountryViewModel>? Countries { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace DemoLibrary.Data.Models
         public string Summary { get; set; }
 
         [MaxLength(250)]
-        public string Series { get; set; }
+        public string? Series { get; set; }
 
         [Required]
         public string GenreId { get; set; }
