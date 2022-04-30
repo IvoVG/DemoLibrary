@@ -14,7 +14,7 @@
 
         public string Summary { get; set; }
 
-        public string Series { get; set; }
+        public string? Series { get; set; }
 
         public string GenreId { get; set; }
 

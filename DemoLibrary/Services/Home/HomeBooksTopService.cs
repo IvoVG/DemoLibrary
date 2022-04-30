@@ -6,6 +6,6 @@ namespace DemoLibrary.Services.Home
     {
         public int TotalBooks { get; set; }
 
-        public IEnumerable<BookAllServices>? Books { get; set; }
+        public IEnumerable<BookAllServicesModel> Books { get; set; }
     }
 }

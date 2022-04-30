@@ -9,7 +9,7 @@
 <form>
     <div class="container-md; flex-md-shrink-0">
         <div class="list-group; float-md-left">
-            <partial name="_MineRoomPartial" model="@Model" />
+            <partial name="_MinePartial" model="@Model" />
 
         </div>
     </div>
@@ -17,8 +17,17 @@
         @foreach (var book in Model.Books)
         {
             <div class="col-sm-4; flex-md-wrap">
-                <a href="/Reader/MineRoom?id= @book.Id"><img src="@book.CoverPath" style="height:300px; width:200px" class="img-responsive book"></a>
+                <a href="/Reader/Mine?id= @book.Id"><img src="@Url.Content("~/Covers/images/" + Model.Book.CoverPath)" style="height:300px; width:200px" class="img-responsive book"></a>
             </div>
         }
     </div>
 </form>
+
+<script>
+    $(document).ready(function () {
+        // RELOAD PAGE ON BUTTON CLICK EVENT.
+        $('#reload_page').click(function () {
+            location.reload(true);
+        });
+    });
+</script>

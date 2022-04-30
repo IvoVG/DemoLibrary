@@ -2,6 +2,7 @@
 using DemoLibrary.Data.Models;
 using DemoLibrary.Models.Book;
 using DemoLibrary.Services.Book;
+using DemoLibrary.Services.Reader;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
@@ -14,13 +15,15 @@ namespace DemoLibrary.Controllers
         private readonly LibraryDbContext data;
         [Obsolete]
         private readonly IHostingEnvironment hostingEnv;
+        private readonly IReaderService readerService;
 
         [Obsolete]
-        public BookController(IBookService services, LibraryDbContext data, IHostingEnvironment hostingEnv)
+        public BookController(IBookService services, LibraryDbContext data, IHostingEnvironment hostingEnv,IReaderService readerService)
         {
             this.services = services;
             this.data = data;
             this.hostingEnv = hostingEnv;
+            this.readerService = readerService;
         }
         public IActionResult Add()
         {
@@ -103,8 +106,8 @@ namespace DemoLibrary.Controllers
                 var a = hostingEnv.WebRootPath;
                 var fileName1 = Path.GetFileName(model.CoverUrl.FileName);
                 var fileName2 = Path.GetFileName(model.Address.FileName);
-                var filePath1 = Path.Combine(hostingEnv.WebRootPath, "/Images", fileName1);
-                var filePath2 = Path.Combine(hostingEnv.WebRootPath, @"C:\SoftUni\MyLibrary\books", fileName2);
+                var filePath1 = Path.Combine(hostingEnv.ContentRootPath, "BooksCovers/images", fileName1);
+                var filePath2 = Path.Combine(hostingEnv.WebRootPath, @"C:\SoftUni\DemoLibrary\books", fileName2);
 
                 using (var fileSteam = new FileStream(filePath1, FileMode.Create))
                 {
@@ -163,18 +166,65 @@ namespace DemoLibrary.Controllers
             return View(model);
         }
 
+        public IActionResult Details(string Id)
+        {
+            var model = this.services.GetDetails(Id);
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Download(string Id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var reader = this.data.Readers.FirstOrDefault(x => x.UserId == userId);
+            var books = this.data.ReadersBooks.Where(x => x.ReaderId == reader.Id).ToList();
+            var book = this.data.Books.FirstOrDefault(x => x.Id == Id);
+            var fileName = Path.GetFileName(Path.Combine(@"C:\SoftUni\DemoLibrary\books", book.Address));
+
+            if (readerService.IsWorker(userId))
+            {
+                return BadRequest();
+            }
+            var path = Path.Combine(hostingEnv.WebRootPath, @"C:\SoftUni\DemoLibrary\books", fileName);
+            var result = PhysicalFile(path, "application/x-msdownload", fileName);
+
+            if (result != null && book != null)
+            {
+                if (reader != null)
+                {
+                    if (!books.Any(x => x.BookId == book.Id))
+                    {
+                        reader.Books.Add(new ReaderBook { BookId = book.Id, ReaderId = reader.Id });
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                        data.Books.FirstOrDefault(x => x.Id == Id).Downloads = +1;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+                        data.SaveChanges();
+
+                        return result;
+                    }
+                }
+                return result;
+            }
+            return BadRequest();
+        }
+
         private Author GetAuthor(string firstName, string lastName)
         {
+#pragma warning disable CS8603 // Possible null reference return.
             return data.Authors
                 .Where(a => a.FirstName == firstName && a.LastName == lastName)
                 .FirstOrDefault();
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
         private Translator GetTranslator(string firstName, string lastName)
         {
+#pragma warning disable CS8603 // Possible null reference return.
             return data.Translators
                 .Where(a => a.FirstName == firstName && a.LastName == lastName)
                 .FirstOrDefault();
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
         private IEnumerable<BookCategoryViewModel> GetCategory()

@@ -6,7 +6,7 @@
 
         public string? Title { get; set; }
 
-        public int Create { get; set; }
+        public int CreateYear { get; set; }
 
         public DateTime Uploaded { get; set; }
 

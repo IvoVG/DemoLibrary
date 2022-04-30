@@ -1,10 +1,12 @@
 using DemoLibrary.Data;
 using DemoLibrary.Models;
 using DemoLibrary.Services.Book;
+using DemoLibrary.Services.Home;
 using DemoLibrary.Services.Reader;
 using DemoLibrary.Services.Worker;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IReaderService, ReaderService>();
 builder.Services.AddTransient<IWorkerService, WorkerService>();
 builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddTransient<IHomeService, HomeService>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -69,6 +72,12 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseStaticFiles( new StaticFileOptions()
+{
+    FileProvider= new PhysicalFileProvider(
+             Path.Combine(Directory.GetCurrentDirectory(), "BooksCovers")),
+    RequestPath = new PathString("/Covers")
+});
 
 app.UseRouting();
 

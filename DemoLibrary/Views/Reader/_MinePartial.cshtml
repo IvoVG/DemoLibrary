@@ -4,10 +4,10 @@
 
 
 
-<div class="card col-xl-12 float-left" style="width: 18rem; resize:horizontal">
+<div class="card float-left" style="width: 18rem; resize:horizontal">
     @if (Model.Books.Count != 0)
     {
-    <img src="@Model.Book.CoverPath" class="card-img-top" alt="...">
+    <img src="@Url.Content("~/Covers/images/" + Model.Book.CoverPath)" class="card-img-top" alt="...">
     <div class="card-body">
         <h3 class="card-title">@Model.Book.Title</h3>
         <h5 class="card-title">@Model.Book.AuthorFullName</h5>

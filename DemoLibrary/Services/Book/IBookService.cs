@@ -3,5 +3,6 @@
     public interface IBookService
     {
         IEnumerable<BookAllServicesModel> GetAll();
+        BookDetailsServiceModel GetDetails(string bookId);
     }
 }

@@ -1,0 +1,39 @@
+﻿@using DemoLibrary.Services.Book
+
+@model BookDetailsServiceModel
+@{
+    ViewBag.Title = "Details Book";
+}
+
+<form method="get">
+    <div class="card mb-3" style="max-width: 940px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="@Url.Content("~/Covers/images/" + Model.CoverPath)" style="width:400px;height:500px" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body offset-2">
+                    <h2 class="card-title text-center font-weight-bold">@Model.Title</h2>
+                    <p class="card-text text-center font-weight-bold" style="font-style:inherit; font-size:larger">@Model.AuthorFullName</p>
+                    <p></p>
+                    <p class="card-text text-center font-weight-bold" style="font-style:inherit; font-size:larger">@Model.Series</p>
+                    <p class="card-text text-center font-weight-bold" style="font-style:inherit">@Model.CreateYear</p>
+                    <p class="card-text text-center font-weight-bold" style="font-style:inherit">@Model.Summary</p>
+                    <p class="card-text text-center font-weight-bold" style="font-style:inherit">@Model.Rating</p>
+                    <p class="card-text"><small class="text-muted">@Model.Uploaded</small></p>
+                    <p class="card-text"><small class="text-muted">@Model.Downloads</small></p>
+                </div>
+            </div>
+        </div>
+        <div class="btn-group">
+            <a asp-controller="Book" asp-action="Download" asp-route-Id="@Model.Id" class="btn btn-dark">Свали</a>
+            <button type="button" asp-controller="Reader" asp-action="Rating" asp-route-bookId="@Model.Id" class="btn btn-primary">Оцени</button>
+            <button type="button" class="btn btn-success">Коментирай</button>
+            @if (User.IsInRole("Admin"))
+            {                
+                <button type="button" class="btn btn-warning">Редактирай</button>
+                <button type="button" class="btn btn-danger">Изтрий</button>
+            }
+        </div>
+    </div>
+</form>
